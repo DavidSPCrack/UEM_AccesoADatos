@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 import ejercicios.Ejercicio01;
 
-public class Test {
+public class TestMain01 {
 
 	private static InputStreamReader iSR = new InputStreamReader(System.in);
 	private static BufferedReader bR = new BufferedReader(iSR);
