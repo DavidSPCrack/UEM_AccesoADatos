@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import ejercicios.Ejercicio03;
 
-public class TestMain02 {
+public class TestMain03 {
 
 	public static void main(String[] args) throws IOException {
 		String path = "C:\\test2\\fichero.txt";
