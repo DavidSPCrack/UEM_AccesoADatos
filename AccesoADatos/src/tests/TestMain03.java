@@ -1,19 +1,48 @@
 package tests;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import ejercicios.Ejercicio03;
 
 public class TestMain03 {
 
+	private static InputStreamReader iSR = new InputStreamReader(System.in);
+	private static BufferedReader bR = new BufferedReader(iSR);
+
+	public static String readLine() throws IOException {
+		return bR.readLine();
+	}
+
 	public static void main(String[] args) throws IOException {
-		String path = "C:\\test2\\fichero.txt";
-		int numCar = 30;
-		String contenido = Ejercicio03.readTextFile(path, numCar);
+		initializeTestEjercicio01();
+		System.exit(0);
+	}
+
+	public static void initializeTestEjercicio01() throws IOException {
+		mostrarMenu();
+	}
+
+	public static void mostrarMenu() throws IOException {
+		String response = "";
+		boolean continueExec = true;
+		do {
+			System.out.println("Introduzca un fichero: ");
+			response = readLine();
+			continueExec = !response.equals("-1");
+			if (continueExec)
+				testEjercicio03(response);
+			else
+				System.out.println("¡Hasta luego!");
+		} while (continueExec);
+	}
+
+	public static void testEjercicio03(String path) throws IOException {
+		String contenido = Ejercicio03.readTextFile(path, Integer.MAX_VALUE);
 
 		System.out.println("Contenido del fichero:");
 		System.out.println(contenido);
-		System.exit(0);
 	}
 
 }
