@@ -16,11 +16,11 @@ public class TestMain03 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		initializeTestEjercicio01();
+		initializeTestEjercicio03();
 		System.exit(0);
 	}
 
-	public static void initializeTestEjercicio01() throws IOException {
+	public static void initializeTestEjercicio03() throws IOException {
 		mostrarMenu();
 	}
 
