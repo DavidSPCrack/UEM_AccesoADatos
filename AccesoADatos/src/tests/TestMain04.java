@@ -8,7 +8,7 @@ import ejercicios.Ejercicio04;
 
 public class TestMain04 {
 
-	private final static String PATH_FILE_TEXT = "./resources/QUIJOTE.txt";
+	private final static String PATH_FILE_TEXT = "./resources/QUIJOTE_CP1252.txt";
 
 	private static InputStreamReader iSR = new InputStreamReader(System.in);
 	private static BufferedReader bR = new BufferedReader(iSR);
@@ -25,96 +25,148 @@ public class TestMain04 {
 	public static void initializeTestEjercicio04() {
 		testContarCaracteres();
 		testContarPalabras();
+		testContarPalabrasSufijo();
 		testContarLineas();
 		testContarLetrasMinusculasPuras();
+		testContarLetras();
+		testContarDiptongos();
+		testPalabraMasLarga();
 	}
 
-	public static void testContarCaracteres() {
-		long startMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long start = System.currentTimeMillis();
-		int nume = Ejercicio04.contarCaracteres(PATH_FILE_TEXT);
-		long end = System.currentTimeMillis();
-		long endMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long elapsed = end - start;
-		long mem = endMem - startMem;
+	private static void testContarCaracteres() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Número de caracteres: ");
-		sb.append(nume);
-		sb.append(" (");
-		sb.append(elapsed);
-		sb.append("ms)");
-		sb.append(" (");
-		sb.append(mem / 1024 / 1024);
-		sb.append(" Mb)");
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
 
-		System.out.println(sb.toString());
+			public String executeMethod() {
+				int nume = Ejercicio04.contarCaracteres(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de caracteres: ");
+		test.run();
 	}
 
-	public static void testContarPalabras() {
-		long startMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long start = System.currentTimeMillis();
-		int nume = Ejercicio04.contarPalabras(PATH_FILE_TEXT);
-		long end = System.currentTimeMillis();
-		long endMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long elapsed = end - start;
-		long mem = endMem - startMem;
+	private static void testContarPalabras() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Número de palabras: ");
-		sb.append(nume);
-		sb.append(" (");
-		sb.append(elapsed);
-		sb.append("ms)");
-		sb.append(" (");
-		sb.append(mem / 1024 / 1024);
-		sb.append(" Mb)");
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
 
-		System.out.println(sb.toString());
+			public String executeMethod() {
+				int nume = Ejercicio04.contarPalabras(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de palabras: ");
+		test.run();
 	}
 
-	public static void testContarLineas() {
-		long startMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long start = System.currentTimeMillis();
-		int nume = Ejercicio04.contarLineas(PATH_FILE_TEXT);
-		long end = System.currentTimeMillis();
-		long endMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long elapsed = end - start;
-		long mem = endMem - startMem;
+	private static void testContarPalabrasSufijo() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Número de lineas: ");
-		sb.append(nume);
-		sb.append(" (");
-		sb.append(elapsed);
-		sb.append("ms)");
-		sb.append(" (");
-		sb.append(mem / 1024 / 1024);
-		sb.append(" Mb)");
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
 
-		System.out.println(sb.toString());
+			public String executeMethod() {
+				int nume = Ejercicio04.contarPalabras(PATH_FILE_TEXT, "cion");
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de palabras terminadas en cion: ");
+		test.run();
 	}
 
-	public static void testContarLetrasMinusculasPuras() {
-		long startMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long start = System.currentTimeMillis();
-		int nume = Ejercicio04.contarLetrasMinusculasPuras(PATH_FILE_TEXT);
-		long end = System.currentTimeMillis();
-		long endMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		long elapsed = end - start;
-		long mem = endMem - startMem;
+	private static void testContarLineas() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Número de letras minusculas puras: ");
-		sb.append(nume);
-		sb.append(" (");
-		sb.append(elapsed);
-		sb.append("ms)");
-		sb.append(" (");
-		sb.append(mem / 1024 / 1024);
-		sb.append(" Mb)");
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
 
-		System.out.println(sb.toString());
+			public String executeMethod() {
+				int nume = Ejercicio04.contarLineas(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de lineas: ");
+		test.run();
+	}
+
+	private static void testContarLetrasMinusculasPuras() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
+
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
+
+			public String executeMethod() {
+				int nume = Ejercicio04.contarLetrasMinusculasPuras(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de letras minusculas puras: ");
+		test.run();
+	}
+
+	private static void testContarLetras() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
+
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
+
+			public String executeMethod() {
+				int nume = Ejercicio04.contarLetras(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de letras: ");
+		test.run();
+	}
+
+	private static void testContarDiptongos() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
+
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
+
+			public String executeMethod() {
+				int nume = Ejercicio04.contarDiptongos(PATH_FILE_TEXT);
+				return Integer.toString(nume);
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("Número de diptongos: ");
+		test.run();
+	}
+
+	private static void testPalabraMasLarga() {
+		class DefaultTestEncapsulado extends TestEncapsulado {
+
+			public DefaultTestEncapsulado(String textoDetalle) {
+				super(textoDetalle);
+			}
+
+			public String executeMethod() {
+				String result = Ejercicio04.palabraMasLarga(PATH_FILE_TEXT);
+				return result;
+			}
+
+		}
+		DefaultTestEncapsulado test = new DefaultTestEncapsulado("");
+		test.run();
 	}
 
 }
