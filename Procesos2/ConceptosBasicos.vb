@@ -1,6 +1,6 @@
 ﻿Imports System.Threading
 
-Public Class Form1
+Public Class ConceptosBasicos
 
 #Region "Eventos de Hilo y sus Handlers"
 
