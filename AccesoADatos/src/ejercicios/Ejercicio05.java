@@ -6,8 +6,44 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.SecureRandom;
 
 public class Ejercicio05 {
+
+	private final static String[] RESULTADOS = { "1", "X", "2" };
+
+	public static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+	public static final String[] LOREM_IPSUM_WORDS;
+	static {
+		LOREM_IPSUM_WORDS = LOREM_IPSUM.split("\\s");
+	}
+
+	public static void writeLoremIpsum(int words, int lines, String path) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < lines; i++) {
+			for (int j = 0; j < words || j < LOREM_IPSUM_WORDS.length; j++) {
+				if (j > 0) {
+					sb.append(" ");
+				}
+				sb.append(LOREM_IPSUM_WORDS[j]);
+			}
+			sb.append("\r\n");
+		}
+		guardarFichero(sb.toString(), path);
+	}
+
+	public static void writeQuiniela(String[] partidos, String path) {
+		SecureRandom rnd = new SecureRandom();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < partidos.length; i++) {
+			int res = rnd.nextInt(RESULTADOS.length);
+			sb.append(partidos[i]);
+			sb.append(" - ");
+			sb.append(RESULTADOS[res]);
+			sb.append("\r\n");
+		}
+		guardarFichero(sb.toString(), path);
+	}
 
 	public static String readFibonacci(String path) {
 		String secFibo = leerFicheroBinario(path);
