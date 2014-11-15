@@ -1,4 +1,4 @@
-package tests;
+package tests.act01;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import ejercicios.Ejercicio01;
+import ejercicios.act01.Ejercicio01;
 
 public class TestEjercicio01 {
 

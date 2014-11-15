@@ -1,4 +1,4 @@
-package ejercicios;
+package ejercicios.act05;
 
 import java.io.BufferedWriter;
 import java.io.File;

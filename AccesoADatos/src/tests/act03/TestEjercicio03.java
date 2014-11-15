@@ -1,4 +1,4 @@
-package tests;
+package tests.act03;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import ejercicios.Ejercicio03;
+import ejercicios.act03.Ejercicio03;
 
 public class TestEjercicio03 {
 

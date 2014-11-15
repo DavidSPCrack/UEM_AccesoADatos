@@ -1,10 +1,11 @@
-package tests;
+package tests.act04;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ejercicios.Ejercicio04;
+import tests.TestEncapsulado;
+import ejercicios.act04.Ejercicio04;
 
 public class TestMain04 {
 

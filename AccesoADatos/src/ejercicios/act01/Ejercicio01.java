@@ -1,4 +1,4 @@
-package ejercicios;
+package ejercicios.act01;
 
 import java.io.File;
 

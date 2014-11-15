@@ -1,10 +1,10 @@
-package tests;
+package tests.act01;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ejercicios.Ejercicio01;
+import ejercicios.act01.Ejercicio01;
 
 public class TestMain01 {
 
