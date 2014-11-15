@@ -19,7 +19,7 @@ public class Procesos1 {
 
 		try {
 			Process process = pb.start();
-			int retorno = waitFor();
+			int retorno = process.waitFor();
 			System.out.println("La ejecución de " + Arrays.toString(args) + " devuelve " + retorno);
 		} catch (IOException ex) {
 			System.err.println(" Excepción de Entrada / Salida !!");
