@@ -2,7 +2,10 @@ package chaos;
 
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
@@ -11,15 +14,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSlider;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import javax.swing.border.BevelBorder;
-import javax.swing.JSlider;
+import javax.swing.border.EmptyBorder;
 
 public class InitGUI extends JFrame {
 
@@ -63,7 +66,7 @@ public class InitGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		
+
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4);
 		panel_4.setLayout(new GridLayout(1, 1, 0, 0));
@@ -108,7 +111,7 @@ public class InitGUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
-		
+
 		JPanel panel = new JPanel();
 		panel_1.add(panel);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
@@ -133,6 +136,18 @@ public class InitGUI extends JFrame {
 		});
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selOpt = JOptionPane.showConfirmDialog(null, "Are you 100% sure?", "Seleccione una opción", JOptionPane.YES_NO_CANCEL_OPTION);
+				if (selOpt == JOptionPane.CANCEL_OPTION) {
+					
+				} else if (selOpt == JOptionPane.NO_OPTION) {
+					
+				} else if (selOpt == JOptionPane.YES_OPTION) {
+					
+				}
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(InitGUI.class.getResource("/res/Water-Drop.png")));
 		btnNewButton.setMargin(new Insets(0, 0, 0, 0));
 		panel_1.add(btnNewButton);
@@ -140,18 +155,23 @@ public class InitGUI extends JFrame {
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_2.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JSlider slider = new JSlider();
+		slider.setValue(25);
+		slider.setSnapToTicks(true);
+		slider.setPaintLabels(true);
+		slider.setPaintTicks(true);
+		slider.setPaintTrack(true);
 		panel_5.add(slider);
-		
+
 		JPanel panel_6 = new JPanel();
 		panel_2.add(panel_6);
 		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JLabel lblNewLabel = new JLabel("Dropping...");
 		panel_6.add(lblNewLabel);
 		lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -159,7 +179,7 @@ public class InitGUI extends JFrame {
 		JPanel panel_3 = new JPanel();
 		contentPane.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(InitGUI.class.getResource("/res/hierba-footer.png")));
 		panel_3.add(lblNewLabel_1);
