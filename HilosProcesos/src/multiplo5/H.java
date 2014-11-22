@@ -18,6 +18,9 @@ public class H {
 			}
 		}
 		valueSet = false;
+		if (n % 5 == 0)
+			System.out.println(getTexto("Mensaje del hilo2:: ", " es multiplo de 5", n));
+
 		notify();
 		return this.n;
 	}
@@ -31,6 +34,7 @@ public class H {
 		}
 		valueSet = true;
 		this.n = n;
+		System.out.println(getTexto("Mensaje del hilo1:: ", "", n));
 		notify();
 	}
 
