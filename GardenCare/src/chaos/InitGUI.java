@@ -28,6 +28,14 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Clase principal que ejecuta la ventana de GardenCare
+ * 
+ * @author david.sancho
+ * @version 0.5
+ * @see ImgPanel se usa para redimensionar el cesped dinamicamente
+ *
+ */
 public class InitGUI extends JFrame {
 
 	/**
@@ -43,6 +51,9 @@ public class InitGUI extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param args
+	 *            Execution parameters
 	 */
 	public static void main(String[] args) {
 		try {

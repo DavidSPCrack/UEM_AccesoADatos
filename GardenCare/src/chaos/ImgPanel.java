@@ -8,8 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Clase para redimensionar dinamicamente una clase
  * @author David
+ * @version 1.0
  */
 public class ImgPanel extends JPanel {
 	/**
