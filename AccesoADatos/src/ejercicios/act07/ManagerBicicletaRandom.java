@@ -96,7 +96,7 @@ public class ManagerBicicletaRandom implements IADBicicleta {
 			int pos = getPosicion(id);
 			boolean existBici = existObject(pos);
 			if (existBici) {
-				raf = new RandomAccessFile(PATH_FILE, READ);
+				raf = new RandomAccessFile(PATH_FILE, READ_WRITE);
 				raf.seek(getPosicionBytes(pos));
 				bici.writeObject(raf);
 			}
@@ -125,9 +125,11 @@ public class ManagerBicicletaRandom implements IADBicicleta {
 			int pos = getPosicion(id);
 			boolean existBici = existObject(pos);
 			if (existBici) {
-				raf = new RandomAccessFile(PATH_FILE, READ);
+				raf = new RandomAccessFile(PATH_FILE, READ_WRITE);
 				raf.seek(getPosicionBytes(pos));
 				Bicicleta.writeVoidObject(raf);
+				this.mapaIds.remove(id);
+				this.mapaObjs.remove(pos);
 			}
 			ok = true;
 		} catch (FileNotFoundException e) {
