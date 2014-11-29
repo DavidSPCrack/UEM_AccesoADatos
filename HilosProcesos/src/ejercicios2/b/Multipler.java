@@ -12,6 +12,7 @@ public class Multipler implements Runnable {
 		this.n = 1;
 		this.multiple = multiple;
 		this.max = multiple * 10;
+		this.h.add(this.multiple);
 		new Thread(this, "Hilo".concat(String.valueOf(multiple))).start();
 
 	}
@@ -43,7 +44,7 @@ public class Multipler implements Runnable {
 	}
 
 	public boolean isEnded() {
-		return getN() == getMax();
+		return getN() == getMax() + 1;
 	}
 
 }
