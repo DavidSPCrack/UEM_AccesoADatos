@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -29,20 +31,23 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Clase principal que ejecuta la ventana de GardenCare
+ * Principal class of garden care GardenCare
  * 
  * @author david.sancho
  * @version 0.5
- * @see ImgPanel se usa para redimensionar el cesped dinamicamente
+ * @see ImgPanel dinamyc redimension of image
  *
  */
 public class InitGUI extends JFrame {
 
 	/**
-	 * 
+	 * Serial version UID
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Principal Content Pane
+	 */
 	private JPanel contentPane;
 	private JButton btnNewButton;
 	private JList<String> listElements;
@@ -99,6 +104,12 @@ public class InitGUI extends JFrame {
 		toolBar.add(horizontalGlue_1);
 
 		JLabel lblPerfectSun = new JLabel("Perfect sun");
+		lblPerfectSun.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Beutiful sunshine!");
+			}
+		});
 		lblPerfectSun.setIcon(new ImageIcon(InitGUI.class.getResource("/res/Sunshine.png")));
 		lblPerfectSun.setIconTextGap(3);
 		toolBar.add(lblPerfectSun);
@@ -114,6 +125,12 @@ public class InitGUI extends JFrame {
 		toolBar.add(horizontalStrut_1);
 
 		JLabel lblCloudy = new JLabel("Cloudy");
+		lblCloudy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Owwww its cold");
+			}
+		});
 		lblCloudy.setIcon(new ImageIcon(InitGUI.class.getResource("/res/Cloudy.png")));
 		lblCloudy.setIconTextGap(3);
 		toolBar.add(lblCloudy);
@@ -129,6 +146,12 @@ public class InitGUI extends JFrame {
 		toolBar.add(horizontalStrut_3);
 
 		JLabel lblRains = new JLabel("Rains");
+		lblRains.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Im wet");
+			}
+		});
 		lblRains.setIcon(new ImageIcon(InitGUI.class.getResource("/res/Cloud-Download.png")));
 		lblRains.setIconTextGap(3);
 		toolBar.add(lblRains);
@@ -144,6 +167,12 @@ public class InitGUI extends JFrame {
 		toolBar.add(horizontalStrut_5);
 
 		JLabel lblWindy = new JLabel("Windy");
+		lblWindy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Wiiiiiiiind");
+			}
+		});
 		lblWindy.setIcon(new ImageIcon(InitGUI.class.getResource("/res/Refresh.png")));
 		lblWindy.setIconTextGap(3);
 		toolBar.add(lblWindy);
