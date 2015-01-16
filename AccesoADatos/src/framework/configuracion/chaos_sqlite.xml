@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAOS>
+	<URLSQL>jdbc:mysql://chaosphoenix.es:3306/</URLSQL>
+	<INSTSQL>chaos</INSTSQL>
+	<USERSQL>ChaosSQL</USERSQL>
+	<PASSSQL>ChaosSQL6</PASSSQL>
+</CHAOS>

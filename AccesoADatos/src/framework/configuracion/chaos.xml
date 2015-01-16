@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAOS>
+	<URLSQL>jdbc:sqlite:./resources/db/sample.db</URLSQL>
+	<INSTSQL></INSTSQL>
+	<USERSQL></USERSQL>
+	<PASSSQL></PASSSQL>
+</CHAOS>
