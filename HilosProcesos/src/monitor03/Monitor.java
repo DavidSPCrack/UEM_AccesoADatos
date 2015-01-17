@@ -3,51 +3,52 @@ package monitor03;
 public class Monitor {
 
 	private int actual = 0;
-	private int profesor = 0;
-
-	public synchronized void escribir(String texto, int orden) {
-
-	}
+	private boolean turnProfesor = false;
 
 	public synchronized void llegar(IPersona persona) {
-		while (persona.getOrden() != actual) {
+		while (persona.getOrden() != actual || turnProfesor) {
 			try {
 				wait();
 			} catch (InterruptedException ex) {
 			}
 		}
 		persona.llegar();
-		
-		
-		actual = (actual + 1) % 10;
-		if(actual == 0) {
-			profesor = 1;
+
+		actual = (actual + 1);
+		if (actual == 10) {
+			actual = 0;
+			turnProfesor = true;
 		}
-		
+
 		notifyAll();
 	}
 
 	public synchronized void saludar(IPersona persona) {
-		while (persona.getOrden() != actual) {
+		while (persona.getOrden() != actual || turnProfesor) {
 			try {
 				wait();
 			} catch (InterruptedException ex) {
 			}
 		}
 		persona.saludar();
-		actual = (actual + 1) % 10;
+		actual = (actual + 1);
+		if (actual == 10) {
+			actual = 0;
+			turnProfesor = true;
+		}
 		notifyAll();
 	}
 
 	public synchronized void llegarProfesor(IPersona persona) {
-		while (profesor == 0) {
+		while (!turnProfesor) {
 			try {
 				wait();
 			} catch (InterruptedException ex) {
 			}
 		}
 		persona.llegar();
-		actual = (actual + 1) % 10;
+		turnProfesor = false;
+		actual = 0;
 		notifyAll();
 	}
 

@@ -8,7 +8,7 @@ public class Main {
 			String nameAlumno = "Alumno".concat(Integer.toString(i + 1));
 			new Alumno(nameAlumno, i, monitor);
 		}
-		new Profesor("Jose Antonio Perez", 10, monitor);
+		new Profesor("Jose Antonio Perez", monitor);
 	}
 
 }

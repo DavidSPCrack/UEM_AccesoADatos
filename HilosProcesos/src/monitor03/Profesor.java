@@ -1,24 +1,22 @@
 package monitor03;
 
-public class Profesor extends Thread {
+public class Profesor extends Thread implements IPersona {
 
 	private Monitor monitor;
 	private String nombre;
-	private int orden;
 
-	public Profesor(String nombre, int orden, Monitor monitor) {
+	public Profesor(String nombre, Monitor monitor) {
 		this.nombre = nombre;
 		this.monitor = monitor;
-		this.orden = orden;
+		new Thread(this).start();
 	}
 
 	public void run() {
-		// monitor.llegar(this);
-		// monitor.saludar(this);
+		monitor.llegarProfesor(this);
 	}
 
 	public int getOrden() {
-		return orden;
+		return 0;
 	}
 
 	public void llegar() {
