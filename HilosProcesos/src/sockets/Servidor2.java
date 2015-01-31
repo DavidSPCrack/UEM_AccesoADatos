@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sockets;
 
 import java.io.DataInputStream;
@@ -10,50 +5,42 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Calendar;
 
 /**
  *
- * @author Samuel
+ * @author David
  */
 public class Servidor2 {
-    
-    public static void main(String args[]) {
-        ServerSocket servidor;
-        Socket conexion;
-        DataOutputStream salida;
-        DataInputStream entrada;
-        int num = 0;
-        try {
-// Creamos un ServerSocket en el puerto especificado
-            servidor = new ServerSocket(5000);
-            System.out.println("Servidor Arrancado correctamente");
-            while (true) {
-//Se espera la conexi贸n de alg煤n cliente
-                conexion = servidor.accept();
-                num++;
-                System.out.println("Conexi贸n n煤mero" + num + " desde: "+ conexion.getInetAddress().getHostName());
-// Abrimos los canales de entrada y salida
-                entrada = new DataInputStream(conexion.getInputStream());
-                salida = new DataOutputStream(conexion.getOutputStream());
-//Leemos el mensaje del cliente
-                String mensaje = entrada.readUTF();
-                System.out.println("Conexi贸n n." + num + " mensaje: "+ mensaje);
-                
-                int numero = Integer.parseInt(mensaje);
-                int solucion = 0;
-                for(int i=0;i<=numero;i++){
-                    solucion += i;
-                }
-// Le respondemos al cliente
-                
-                salida.writeUTF("La suma de todos los n煤meros enteros hasta "
-                +numero+" es "+solucion);
-//Se cierra la conexi贸n
-                conexion.close();
-            }
-        } catch (IOException e) {
-        }
-    }
-    
+
+	public static void main(String args[]) {
+		ServerSocket servidor;
+		Socket conexion;
+		DataOutputStream salida;
+		DataInputStream entrada;
+		int num = 0;
+		try {
+			servidor = new ServerSocket(5000);
+			System.out.println("Servidor Arrancado correctamente");
+			while (true) {
+				conexion = servidor.accept();
+				num++;
+				System.out.println("Conexi髇 n鷐ero" + num + " desde: " + conexion.getInetAddress().getHostName());
+				entrada = new DataInputStream(conexion.getInputStream());
+				salida = new DataOutputStream(conexion.getOutputStream());
+				String mensaje = entrada.readUTF();
+				System.out.println("Conexi髇 n." + num + " mensaje: " + mensaje);
+
+				int numero = Integer.parseInt(mensaje);
+				int solucion = 0;
+				for (int i = 0; i <= numero; i++) {
+					solucion += i;
+				}
+
+				salida.writeUTF("La suma de todos los n鷐eros enteros hasta " + numero + " es " + solucion);
+				conexion.close();
+			}
+		} catch (IOException e) {
+		}
+	}
+
 }

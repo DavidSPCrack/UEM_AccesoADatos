@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sockets;
 
 import java.io.DataInputStream;
@@ -13,54 +8,41 @@ import java.net.Socket;
 
 /**
  *
- * @author Samuel
+ * @author David
  */
 public class Servidor6 {
-    
-     public static void main(String args[]) {
-        ServerSocket servidor;
-        Socket conexion;
-        DataOutputStream salida;
-        DataInputStream entrada;
-        int num = 0;
-        try {
-// Creamos un ServerSocket en el puerto especificado
-            servidor = new ServerSocket(5000);
-            System.out.println("Servidor Arrancado correctamente");
-            while (true) {
-//Se espera la conexi贸n de alg煤n cliente
-                conexion = servidor.accept();
-                num++;
-                System.out.println("Conexi贸n n煤mero" + num + " desde: "+ conexion.getInetAddress().getHostName());
-// Abrimos los canales de entrada y salida
-                entrada = new DataInputStream(conexion.getInputStream());
-                salida = new DataOutputStream(conexion.getOutputStream());
-//Leemos el mensaje del cliente
-                Double num1 = entrada.readDouble();             
-                String mensaje = entrada.readUTF();
-                
-                
-                System.out.println("Conexi贸n n." + num + " mensaje:"+mensaje+" "+num1);
-                
-                
-                
-                Double area = Math.rint(Math.PI*num1*num1)/100;
-                Double perim = Math.rint(2*Math.PI*num1)/100;
-                
-                String respuesta = "El 谩rea de la circunferencia es "+area
-                        +" y el per铆metro "+perim;
-             
-// Le respondemos al cliente
-                
-                salida.writeUTF(respuesta);
-                
-                
-//Se cierra la conexi贸n
-                conexion.close();
-                
-            }
-        } catch (IOException e) {
-        }
-    }
-    
+
+	public static void main(String args[]) {
+		ServerSocket servidor;
+		Socket conexion;
+		DataOutputStream salida;
+		DataInputStream entrada;
+		int num = 0;
+		try {
+			servidor = new ServerSocket(5000);
+			System.out.println("Servidor Arrancado correctamente");
+			while (true) {
+				conexion = servidor.accept();
+				num++;
+				entrada = new DataInputStream(conexion.getInputStream());
+				salida = new DataOutputStream(conexion.getOutputStream());
+				Double num1 = entrada.readDouble();
+				String mensaje = entrada.readUTF();
+
+				System.out.println("Conexi髇 n." + num + " mensaje:" + mensaje + " " + num1);
+
+				Double area = Math.rint(Math.PI * num1 * num1) / 100;
+				Double perim = Math.rint(2 * Math.PI * num1) / 100;
+
+				String respuesta = "El 醨ea de la circunferencia es " + area + " y el per韒etro " + perim;
+
+				salida.writeUTF(respuesta);
+
+				conexion.close();
+
+			}
+		} catch (IOException e) {
+		}
+	}
+
 }
