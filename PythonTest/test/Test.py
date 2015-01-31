@@ -2,15 +2,15 @@ class Person():
     __name = ""
     __address = ""
     
-    def __init__(self, name, address):
-        self.__name = name
+    def __init__(self, nombre, address):
+        self.__name = nombre
         self.__address = address
         
     def get_name(self):
         return self.__name
     
-    def set_name(self, name):
-        self.__name = name
+    def set_name(self, nombre):
+        self.__name = nombre
         
     def get_address(self):
         return self.__address
