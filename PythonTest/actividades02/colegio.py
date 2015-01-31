@@ -3,9 +3,20 @@ Created on 31/01/2015
 
 @author: David
 '''
-
-
-
+        
+        
+def mostrarTitulo(titulo):
+    print("-" * 30)
+    print(" " * 6, titulo)
+    print("-" * 30)
+    
+def inputInt(text):
+    while(True):
+        try:
+            return int(input(text))
+        except ValueError:
+            print("Introduce un valor númerico")
+        
 class Alumno():    
     def _init_(self, nombre, asignatura1, asignatura2, asignatura3, nota11, nota12, nota13, nota21, nota22, nota23, nota31, nota32, nota33):
         self.nombre = nombre
@@ -21,20 +32,6 @@ class Alumno():
         self.nota31 = nota31
         self.nota32 = nota32
         self.nota33 = nota33
-        
-        
-def mostrarTitulo(titulo):
-    print("-" * 30)
-    print(" " * 6, titulo)
-    print("-" * 30)
-    
-def inputInt(text):
-    while(True):
-        try:
-            return int(input(text))
-        except ValueError:
-            print("Introduce un valor númerico")
-        
 
 
 listaAlumnos = []
