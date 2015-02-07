@@ -25,7 +25,7 @@ public class Servidor1 {
 			while (true) {
 				conexion = servidor.accept();
 				num++;
-				System.out.println("Conexión nÃºmero" + num + " desde: " + conexion.getInetAddress().getHostName());
+				System.out.println("Conexión número" + num + " desde: " + conexion.getInetAddress().getHostName());
 				entrada = new DataInputStream(conexion.getInputStream());
 				salida = new DataOutputStream(conexion.getOutputStream());
 				String mensaje = entrada.readUTF();
