@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Siempre las líneas xml van a ir delimitadas por la etiqueta openerp -->
+<openerp>
+	<!--Las etiquetas data también delimitan a las record siempre -->
+	<data> <!-- Toda la parte grafica del menú va dentro de la etiqueta <demo>...</demo> -->
+		<!--Construimos la Vista lista - Tree View -->
+		<record model="ir.ui.view" id="view_demo_tree">
+			<field name="name">demo.tree</field>
+			<field name="model">demo.demo</field>
+			<field name="arch" type="xml">
+				<tree string="Lista de registro">
+					<field name="name" />
+					<field name="fecha_nac" />
+					<field name="edad" />
+				</tree>
+			</field>
+		</record>
+		<!-- Construimos la Vista formulario - Form View -->
+		<record model="ir.ui.view" id="view_demo_form">
+			<field name="name">demo.form</field>
+			<field name="model">demo.demo</field>
+			<field name="arch" type="xml">
+				<form string="Nuevo registro" version="7.0">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="fecha_nac" />
+							<field name="edad" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Definimos una acción para abrir el formulario de demo, cuando hagamos 
+			clic en el menú "Demo" -->
+		<record model="ir.actions.act_window" id="action_open_view_demo_form">
+			<field name="name">Demo</field>
+			<field name="res_model">demo.demo</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- Definimos el nombre del menú padre para Demo, que irá en la parte 
+			superior de openerp -->
+		<menuitem name="Demo" id="menu_demo_form" action="action_open_view_demo_form"
+			sequence="15" />
+
+		<!-- Lo siguiente es el menú hijo de Demo, que también se llama Demo -->
+		<menuitem name="Demo" id="menu_demo" parent="menu_demo_form"
+			sequence="2" />
+
+		<!-- El siguiente menú "Lista demo", listará los registros guardados en 
+			la tabla "demo" -->
+		<menuitem name="Lista demo" id="listar_demo" parent="menu_demo"
+			action="action_open_view_demo_form" sequence="3" />
+	</data>
+</openerp>
