@@ -19,7 +19,6 @@ public class ClienteMesa {
 		DataInputStream entrada = null;
 		int puerto = 12345;
 		int numeroMesa = 1;
-		boolean fin = false;
 		try {
 			socket = new Socket(InetAddress.getLocalHost(), puerto);
 

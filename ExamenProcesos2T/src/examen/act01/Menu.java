@@ -2,6 +2,11 @@ package examen.act01;
 
 public class Menu {
 
+	public static final int TIPO_PLATO = 1;
+	public static final int TIPO_BEBIDA = 2;
+	public static final int TIPO_POSTRE = 3;
+	public static final int SALIR = 4;
+
 	public static void printMenu() {
 		System.out.println();
 		System.out.println("¿Que quiere añadir?:");
@@ -32,10 +37,11 @@ public class Menu {
 	}
 
 	public static String getListaMenu() {
-		String[] listas = new String[3];
+		String[] listas = new String[4];
 		listas[0] = Plato.getLista(1);
 		listas[1] = Bebida.getLista(2);
 		listas[2] = Postre.getLista(3);
+		listas[3] = "   4) Terminar pedido";
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < listas.length; i++) {
 			sb.append(listas[i]);

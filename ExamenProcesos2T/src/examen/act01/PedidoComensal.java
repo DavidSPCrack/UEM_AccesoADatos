@@ -13,17 +13,38 @@ import examen.act01.Menu.Postre;
 
 public class PedidoComensal {
 
+	public static final String CHOOSE_OPTION = "Seleccione una de las opciones: ";
+	public static final String RETRY_SELECTION = "Vuelva a intentarlo, introduzca una de las opciones: ";
+
+	public static final String CHOOSE_QUANTITY = "¿Cuantos quiere? (1-100): ";
+	public static final String RETRY_QUANTITY = "Vuelva a intentarlo, introduzca un número: ";
+
 	public class ItemPedido {
+		private int tipo;
 		private int id;
 		private int numero;
 
-		public ItemPedido(int id, int numero) {
+		public ItemPedido(String[] datos) {
+			this.tipo = getIntParam(datos, 0);
+			this.id = getIntParam(datos, 1);
+			this.numero = getIntParam(datos, 2);
+		}
+
+		public ItemPedido(int tipo, int id, int numero) {
 			this.id = id;
 			this.numero = numero;
 		}
 
 		public int getId() {
 			return id;
+		}
+
+		public int getTipo() {
+			return tipo;
+		}
+
+		public void setTipo(int tipo) {
+			this.tipo = tipo;
 		}
 
 		public void setId(int id) {
@@ -36,6 +57,23 @@ public class PedidoComensal {
 
 		public void setNumero(int numero) {
 			this.numero = numero;
+		}
+
+		public double getPrecioIndividual() {
+			double precio = 0;
+			if (tipo == Menu.TIPO_PLATO) {
+				precio = Plato.getPrecio(getId());
+			} else if (tipo == Menu.TIPO_BEBIDA) {
+				precio = Bebida.getPrecio(getId());
+			} else if (tipo == Menu.TIPO_POSTRE) {
+				precio = Postre.getPrecio(getId());
+			}
+			return precio;
+		}
+
+		public double getPrecioTotal() {
+			double precioIndividual = getPrecioIndividual();
+			return precioIndividual * numero;
 		}
 
 	}
@@ -66,17 +104,32 @@ public class PedidoComensal {
 	}
 
 	private void loadPedido() {
-		Menu.printMenu();
-		int tipo = readInt("Vuelva a intentarlo, introduzca una de las opciones: ", 1, 3);
-		if (tipo == 1) {
-			Menu.printMenuPlatos();
-			Plato[] platos = Plato.values();
-			int item = readInt("Vuelva a intentarlo, introduzca una de las opciones: ", 1, platos.length);
-
-		} else if (tipo == 2) {
-
-		} else if (tipo == 3) {
-
+		int tipo = 0;
+		while (tipo != Menu.SALIR) {
+			Menu.printMenu();
+			tipo = readInt(CHOOSE_OPTION, RETRY_SELECTION, 1, 4);
+			if (tipo == Menu.TIPO_PLATO) {
+				Menu.printMenuPlatos();
+				Plato[] platos = Plato.values();
+				int item = readInt(CHOOSE_OPTION, RETRY_SELECTION, 1, platos.length);
+				int cantidad = readInt(CHOOSE_QUANTITY, RETRY_QUANTITY, 1, 100);
+				ItemPedido itemPedido = new ItemPedido(tipo, item, cantidad);
+				addPlato(itemPedido);
+			} else if (tipo == Menu.TIPO_BEBIDA) {
+				Menu.printMenuBebidas();
+				Bebida[] bebidas = Bebida.values();
+				int item = readInt(CHOOSE_OPTION, RETRY_SELECTION, 1, bebidas.length);
+				int cantidad = readInt(CHOOSE_QUANTITY, RETRY_QUANTITY, 1, 100);
+				ItemPedido itemPedido = new ItemPedido(tipo, item, cantidad);
+				addBebida(itemPedido);
+			} else if (tipo == Menu.TIPO_POSTRE) {
+				Menu.printMenuPostres();
+				Postre[] postres = Postre.values();
+				int item = readInt(CHOOSE_OPTION, RETRY_SELECTION, 1, postres.length);
+				int cantidad = readInt(CHOOSE_QUANTITY, RETRY_QUANTITY, 1, 100);
+				ItemPedido itemPedido = new ItemPedido(tipo, item, cantidad);
+				addPostre(itemPedido);
+			}
 		}
 	}
 
@@ -90,18 +143,24 @@ public class PedidoComensal {
 			} else if (param.equals(COMENSAL)) {
 				nComensal = getIntParam(paramsSimple, 1);
 			} else {
-				String[] ids = getStringParam(paramsSimple, 1).split(",");
+				String[] datosComplex = getStringParam(paramsSimple, 1).split(";");
 				if (param.equals(PLATOS)) {
-					for (int j = 0; j < ids.length; j++) {
-						addPlato(ids[i]);
+					for (int j = 0; j < datosComplex.length; j++) {
+						String[] datos = datosComplex[i].split("%");
+						ItemPedido item = new ItemPedido(datos);
+						addPlato(item);
 					}
 				} else if (param.equals(BEBIDAS)) {
-					for (int j = 0; j < ids.length; j++) {
-						addBebida(ids[i]);
+					for (int j = 0; j < datosComplex.length; j++) {
+						String[] datos = datosComplex[i].split("%");
+						ItemPedido item = new ItemPedido(datos);
+						addBebida(item);
 					}
 				} else if (param.equals(POSTRES)) {
-					for (int j = 0; j < ids.length; j++) {
-						addPostre(ids[i]);
+					for (int j = 0; j < datosComplex.length; j++) {
+						String[] datos = datosComplex[i].split("%");
+						ItemPedido item = new ItemPedido(datos);
+						addPostre(item);
 					}
 				}
 			}
@@ -136,7 +195,9 @@ public class PedidoComensal {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < c.length; i++) {
 			if (i > 0)
-				sb.append(",");
+				sb.append(";");
+			sb.append(c[i].getTipo());
+			sb.append("%");
 			sb.append(c[i].getId());
 			sb.append("%");
 			sb.append(c[i].getNumero());
@@ -146,30 +207,6 @@ public class PedidoComensal {
 
 	public void sendDatos() {
 
-	}
-
-	public void addPlato(String strId) {
-		try {
-			int id = Integer.parseInt(strId);
-			//addPlato(id);
-		} catch (Throwable t) {
-		}
-	}
-
-	public void addPostre(String strId) {
-		try {
-			int id = Integer.parseInt(strId);
-			//addPostre(id);
-		} catch (Throwable t) {
-		}
-	}
-
-	public void addBebida(String strId) {
-		try {
-			int id = Integer.parseInt(strId);
-			//addBebida(id);
-		} catch (Throwable t) {
-		}
 	}
 
 	public void addPlato(ItemPedido item) {
@@ -184,51 +221,32 @@ public class PedidoComensal {
 		bebidas.add(item);
 	}
 
-	public Plato[] getPlatos() {
-		ArrayList<Plato> lista = new ArrayList<Plato>();
-		for (ItemPedido item : platos) {
-			Plato plato = Plato.valueOf(item.getId());
-			if (plato != null)
-				lista.add(plato);
-		}
-		return lista.toArray(new Plato[lista.size()]);
+	public ItemPedido[] getPlatos() {
+		return platos.toArray(new ItemPedido[platos.size()]);
 	}
 
-	public Bebida[] getBebidas() {
-		ArrayList<Bebida> lista = new ArrayList<Bebida>();
-		for (ItemPedido item : bebidas) {
-			Bebida bebida = Bebida.valueOf(item.getId());
-			if (bebida != null)
-				lista.add(bebida);
-		}
-		return lista.toArray(new Bebida[lista.size()]);
+	public ItemPedido[] getBebidas() {
+		return bebidas.toArray(new ItemPedido[bebidas.size()]);
 	}
 
-	public Postre[] getPostres() {
-		ArrayList<Postre> lista = new ArrayList<Postre>();
-		for (ItemPedido item : postres) {
-			Postre postres = Postre.valueOf(item.getId());
-			if (postres != null)
-				lista.add(postres);
-		}
-		return lista.toArray(new Postre[lista.size()]);
+	public ItemPedido[] getPostres() {
+		return postres.toArray(new ItemPedido[postres.size()]);
 	}
 
 	public double getPrecioTotal() {
 		double total = 0;
-		Plato[] platos = getPlatos();
-		for (Plato plato : platos) {
-			total += plato.getPrecio();
+		ItemPedido[] platos = getPlatos();
+		for (ItemPedido plato : platos) {
+			total += plato.getPrecioTotal();
 		}
-		Bebida[] bebidas = getBebidas();
-		for (Bebida bebida : bebidas) {
-			total += bebida.getPrecio();
+		ItemPedido[] bebidas = getBebidas();
+		for (ItemPedido bebida : bebidas) {
+			total += bebida.getPrecioTotal();
 		}
-		Postre[] postres = getPostres();
-		for (Postre postre : postres) {
-			total += postre.getPrecio();
+		ItemPedido[] postres = getPostres();
+		for (ItemPedido postre : postres) {
+			total += postre.getPrecioTotal();
 		}
-
 		return total;
 	}
 
@@ -251,9 +269,10 @@ public class PedidoComensal {
 		}
 	}
 
-	public static int readInt(String rQuestion, int min, int max) {
+	public static int readInt(String question, String rQuestion, int min, int max) {
 		int resp = 0;
 		boolean ok = true;
+		System.out.println(question);
 		do {
 			try {
 				resp = readInt();
